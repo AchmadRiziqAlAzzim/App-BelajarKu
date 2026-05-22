@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tailwind.min.css">
+    <title>Belajarku</title>
+
+   <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.css" rel="stylesheet">
+  <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<style>
+/* 🔥 animasi smooth */
+.up {
+  animation: moveUp 25s linear infinite;
+  will-change: transform;
+}
+
+.down {
+  animation: moveDown 25s linear infinite;
+  will-change: transform;
+}
+
+/* atas ke bawah */
+@keyframes moveUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* bawah ke atas */
+@keyframes moveDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+/* 🧠 biar lebih halus */
+.col {
+  overflow: hidden;
+  height: 100vh;
+}
+
+
+
+        ::-webkit-scrollbar{
+            width:6px;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background:#cbd5e1;
+            border-radius:999px;
+        }
+
+        video{
+            object-fit:cover;
+        }
+</style>
+</head>
+<body>
+  <section id="#home">
+    
+   <nav class="bg-white fixed w-full z-50 top-0 start-0 pt-3 transition-all" id="navbar"  data-aos-duration="1000">
+      <div class="xl:max-w-screen-xl flex flex-wrap items-center justify-between mx- md:mx-5 xl:mx-auto py-2 md:pt-4 p-4 transition">
+        <a href="https://flowbite.com/" class="flex items-center space-x-2 rtl:space-x-reverse text-lg">
+          <i class="bx bxs-education text-3xl md:text-3xl text-normal text-blue-600"></i>
+          <span class="self-center text-black whitespace-nowrap text-normal font-bold">Belajar<span
+              class="text-blue-600">Ku</span></span>
+        </a>
+        <div class="flex items-center md:order-2">
+          <button class="mt-1.5 hidden lg:block">
+            <i class='bx  bx-translate text-[23px] md:text-[26px] me-5 md:me-5 dark:text-slate-200'></i>
+          </button>
+          <button id="darkBtn" class="lg:mt-1.5 px-3 py-1.5 me-5 md:me-7 lg:bg-white bg-gray-100/80 rounded-lg">
+            <i class='bx bx-moon-stars text-xl lg:text-[26px] hover:text-blue-700 text-blue-600 dark:text-yellow-500'></i>
+          </button>
+          <div class="text-center flex items-center bg-gray-100/80 rounded-lg lg:hidden">
+            <button class="inline-flex items-center justify-cente bg-brand box-border border border-transparent hover:bg-brand-strong shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-1.5 focus:outline-none" type="button" id="menuBtn">
+              <i class="bx bxs-menu text-xl" id="menuIcon"></i>
+            </button>
+          </div>
+
+          <?php if (empty($_SESSION['id']) ?? ''): ?>
+                     <a href="route_web.php?page=index_login_page"
+            class="text-white hover:bg-brand-strong transition-all hidden lg:block box-border border border-transparent shadow-xs font-medium leading-5 rounded-lg text-sm  px-6 py-3 focus:outline-none bg-blue-600 hover:bg-blue-700">Login<i
+              class="fa-solid fa-door-open ms-2"></i></a>
+
+                         
+            <?php else: ?>
+           <!-- <div class="dropdown dropdown-end z-[9999]">
+              <button type="button" class="relative w-fit hidden lg:block transition">
+                
+                  <img src="<?= $_SESSION['foto'] ?? ''; ?>"
+                            class="relative w-12 h-12 rounded-full object-cover
+             border-2 border-blue-600
+             transition-transform duration-300
+             group-hover:scale-100">
+              </button>
+
+
+              <div tabindex="-1" class="dropdown-content bg-base-100 rounded-b-lg lg z-10 mt-2.5  dark:border-slate-900 dark:bg-[#00010b] transition-all">
+
+                
+                <a onclick="openEditProfil('<?= $_SESSION['id']; ?>')" class="w-full my-4 flex items-center justify-center cursor-pointer">
+                  <div class="flex flex-col items-center my-3">
+
+                    <div class="relative group">
+
+                      <span class="absolute inset-0 rounded-full bg-blue-500/20 blur-md scale-110 opacity-0 group-hover:opacity-100 transition duration-500"></span>
+
+                      <img src="<?= $_SESSION['foto'] ?? ''; ?>"
+                        class="relative w-16 h-16 rounded-full object-cover
+         border-2 border-blue-500
+         transition-transform duration-300
+         group-hover:scale-100">
+
+   
+
+                    </div>
+
+                  </div>
+                </a>
+
+                <div class="flex justify-center gap-2  border-t border-gray-200 dark:border-slate-900">
+
+                  <div class="w-full hover:bg-gray-100 transition-all rounded-lg rounded-tl-none rounded-e-none dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button type="button" onclick="document.getElementById('my_modal_6').showModal()" class="inline-flex items-center justify-center w-full text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-calculator text-xl"></i>
+                    </button>
+                  </div>
+
+                  <div class="w-full hover:bg-gray-100 transition-all dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button type="button" onclick="document.getElementById('my_modal_2').showModal()"
+                      class="inline-flex items-center justify-center w-full cursor-pointer text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-user bx-tada text-xl"></i>
+                    </button>
+                  </div>
+
+                  <div class="w-full hover:bg-gray-100 transition-all rounded-lg rounded-tr-none rounded-s-none dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button onclick="document.getElementById('my_modal_4').showModal()" class="inline-flex items-center justify-center w-full text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-notification text-xl"></i>
+                    </button>
+                  </div>
+
+                  <div class="w-full hover:bg-gray-100 transition-all rounded-lg rounded-tr-none rounded-s-none dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button onclick="document.getElementById('my_modal_7').showModal()" class="inline-flex items-center justify-center w-full text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-music text-xl"></i>
+                    </button>
+                  </div>
+
+                </div>
+
+
+                <div class="block">
+                  <form method="POST">
+                    <button name="logout" class="w-full py-4 border-t border-gray-200 dark:border-slate-900 text-red-500 dark:hover:bg-red-950 font-semibold text-center flex items-center justify-center cursor-pointer hover:bg-red-50 rounded-b-lg">
+                      <i class="bx bx-door-open me-2"></i> Keluar
+                    </button>
+                  </form>
+                </div>
+
+              </div>
+            </div> -->
+              <?php endif; ?>
+        </div>
+        <div class="items-center justify-between hidden w-full lg:flex md:w-auto md:order-1" id="navbar-search">
+          <div class="relative mt-3 md:hidden">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                  d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+              </svg>
+            </div>
+            <input type="text" id="input-group-1"
+              class="block w-full ps-9 pe-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base px-2.5 py-2 shadow-xs placeholder:text-body"
+              placeholder="Search">
+          </div>
+          <ul
+            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary transition-all"
+            style="gap: 3rem;">
+            <li>
+              <a href="#home"
+                class="nav-link block py-2 px-3 color text-normal text-[#2273ff] flex items-center font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                <i class="bx bxs-video me-3"></i>Home</a>
+            </li>
+            <li>
+              <a href="#feature"
+                class="nav-link block py-2 px-3 text-normal font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                About</a>
+            </li>
+            <li>
+              <a href="route_web.php?page=index_landing_page#Paket"
+                class="nav-link block py-2 px-3 text-normal font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                Packet</a>
+            </li>
+            <li>
+              <a href="route_web.php?page=index_landing_page#Q&A"
+                class="nav-link block py-2 px-3 text-normal font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+  </section>
+<div class="flex items-center justify-between gap-10 w-full max-w-7xl mx-auto h-screen px-8">
+
+    <!-- LEFT VIDEO -->
+    <div class="flex-1">
+
+        <div id="videoGrid"
+            class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="w-full max-w-md bg-white rounded-[32px] p-8 shadow-sm">
+
+        <div class="mb-8">
+
+            <h1 class="text-3xl font-bold text-slate-800">
+                Join Class
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+                Masukkan data untuk masuk meeting online.
+            </p>
+
+        </div>
+
+
+
+        <!-- KODE -->
+        <div class="mb-7">
+
+            <label class="block text-sm font-medium text-slate-700 mb-2">
+                Kode Meeting
+            </label>
+
+            <input
+                type="text" id="roomId"
+                placeholder="Masukkan kode kelas"
+                class="w-full h-14 px-5 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition">
+
+        </div>
+
+        <!-- BUTTON -->
+        <button
+            onclick="joinRoom()"
+            class="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] transition text-white py-4 rounded-2xl font-semibold text-lg">
+
+            Start Meeting
+
+        </button>
+
+    </div>
+
+    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/10 backdrop-blur px-5 py-3 rounded-2xl border border-white/10">
+
+  <button onclick="toggleMic()"
+    class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition">
+    🎤 Mic
+  </button>
+
+  <button onclick="toggleCam()"
+    class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition">
+    📷 Cam
+  </button>
+
+  <button onclick="shareScreen()"
+    class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 transition">
+    🖥️ Share
+  </button>
+
+</div>
+
+</div>
+
+
+
+
+
+
+      
+
+
+   
+
+       
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+ <script src="script.js"></script>
+<script>
+let peer;
+let localStream;
+let currentRoom;
+const peers = {};
+
+const socket = io();
+const videoGrid = document.getElementById("videoGrid");
+
+// ================= JOIN =================
+function joinRoom() {
+
+  const roomId = document.getElementById("roomId").value;
+  currentRoom = roomId;
+
+  startMeeting(roomId);
+}
+
+// ================= START =================
+async function startMeeting(roomId) {
+
+  peer = new Peer();
+
+  localStream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true
+  });
+
+  addVideo(localStream, "You");
+
+  peer.on("open", id => {
+    socket.emit("join-room", roomId, id);
+  });
+
+  peer.on("call", call => {
+    call.answer(localStream);
+
+    call.on("stream", remoteStream => {
+      addVideo(remoteStream, "User");
+    });
+  });
+
+  socket.on("user-connected", userId => {
+    connectToNewUser(userId, localStream);
+  });
+}
+
+// ================= CONNECT =================
+function connectToNewUser(userId, stream) {
+
+  const call = peer.call(userId, stream);
+
+  call.on("stream", remoteStream => {
+    addVideo(remoteStream, "User");
+  });
+
+  peers[userId] = call;
+}
+
+// ================= VIDEO UI =================
+function addVideo(stream, name) {
+
+  const wrapper = document.createElement("div");
+  wrapper.className =
+    "relative rounded-2xl overflow-hidden bg-black aspect-video border border-white/10";
+
+  const video = document.createElement("video");
+  video.srcObject = stream;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.className = "w-full h-full object-cover";
+
+  const label = document.createElement("div");
+  label.innerText = name;
+  label.className =
+    "absolute bottom-2 left-2 bg-black/60 px-3 py-1 rounded-lg text-sm";
+
+  wrapper.appendChild(video);
+  wrapper.appendChild(label);
+
+  videoGrid.appendChild(wrapper);
+}
+
+// ================= MIC =================
+function toggleMic() {
+  const track = localStream.getAudioTracks()[0];
+  track.enabled = !track.enabled;
+}
+
+// ================= CAM =================
+function toggleCam() {
+  const track = localStream.getVideoTracks()[0];
+  track.enabled = !track.enabled;
+}
+
+// ================= SCREEN SHARE =================
+async function shareScreen() {
+
+  const screenStream = await navigator.mediaDevices.getDisplayMedia({
+    video: true
+  });
+
+  const screenTrack = screenStream.getVideoTracks()[0];
+
+  Object.values(peers).forEach(call => {
+
+    const sender = call.peerConnection.getSenders()
+      .find(s => s.track?.kind === "video");
+
+    if (sender) sender.replaceTrack(screenTrack);
+  });
+
+  addVideo(screenStream, "Screen");
+}
+</script>
+
+</body>
+</html>
