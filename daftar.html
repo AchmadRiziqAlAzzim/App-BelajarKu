@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+
+    <script src="js/script.js" defer></script>
+
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <title>Daftar | BelajarKu</title>
+    <link rel="stylesheet" href="css/login-register.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body class="">
+    <div class="d-flex justify-content-center" style="min-height:100vh;">
+        <div class="form-container" style="width: 100%;">
+
+            <div class="bg-panel" style="width:50%;">
+                <script type="module"
+                  src="https://unpkg.com/@splinetool/viewer@1.12.27/build/spline-viewer.js">
+                </script>
+
+                <div class="position-relative d-flex align-items-center justify-content-center overflow-hidden">
+                  <spline-viewer
+                    class="w-full h-full pointer-events-none"
+                    url="https://prod.spline.design/o2E9Xcjtpcp13M6c/scene.splinecode">
+                  </spline-viewer>
+                </div>
+            </div>
+
+            <div class="forms d-flex align-items-center justify-content-center" style="width:50%; height: 100vh;">
+                <div class="">
+                    <div class="text-center mb-4">
+                        <div class="logo d-inline-flex justify-content-center align-items-center rounded-circle mb-3" data-aos="zoom-in">
+                            <i class="bx bx-education" style="font-size:28px;color:var(--primary-clr);"></i>
+                        </div>
+                        <h2 class="fw-bold" data-aos="fade-up" data-aos-delay="200">Selamat Datang</h2>
+                        <p class="text-muted small" data-aos="fade-up" data-aos-delay="400">Sudah siap belajar di <strong>Belajar<span class="text-primary">Ku</span></strong>?</p>
+                    </div>
+    
+                    <form method="POST" action="" class="needs-validation" autocomplete="off" novalidate style="max-width: 350px;" data-aos="fade-up" data-aos-delay="600" id="formd">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <div class="input-group" style="width: 350px;">
+                                <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                <input type="text" class="form-control rounded-end" placeholder="User" id="nama" required>
+                                <div class="invalid-feedback">Wajib diisi</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <div class="input-group" style="width: 350px;">
+                                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                <input type="email" class="form-control rounded-end" placeholder="user123@belajarku.com" id="email" required>
+                                <div class="invalid-feedback">Wajib diisi</div>
+                            </div>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bx bx-lock"></i></span>
+                                <input type="password" class="form-control" placeholder="user123" id="password" required>
+                                <span class="input-group-text btn-primary-kas border-0 rounded-end" onclick="showPass()" style="cursor: pointer;">
+                                    <i class="bx bx-eye" id="eyeIcon"></i>
+                                </span>
+                                <div class="invalid-feedback">Wajib diisi</div>
+                            </div>
+                        </div>
+    
+                        <button type="submit" name="login" class="btn btn-form btn-primary-bk py-2 my-3">Daftar</button>
+                    </form>
+    
+                    <p class="text-center text-muted small mt-2" data-aos="fade-up" data-aos-delay="800">Sudah punya akun? <a href="login.html">Login disini.</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true
+      });
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script>
+(() => {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation')
+
+    Array.from(forms).forEach(form => {
+
+        form.addEventListener('submit', event => {
+
+            event.preventDefault()
+
+            if (!form.checkValidity()) {
+
+                event.stopPropagation()
+
+            } else {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Selamat! akun kamu berhasil dibuat',
+                    text: 'Selamat Datang di BelajarKu',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then( () =>{
+                    window.location.href = 'login.html';
+                });
+
+            }
+
+            form.classList.add('was-validated')
+
+        }, false)
+
+    })
+})()
+</script>
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+</html>
