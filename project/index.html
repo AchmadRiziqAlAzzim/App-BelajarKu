@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tailwind.min.css">
+    <title>Belajarku</title>
+
+   <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.css" rel="stylesheet">
+  <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<style>
+/* 🔥 animasi smooth */
+.up {
+  animation: moveUp 25s linear infinite;
+  will-change: transform;
+}
+
+.down {
+  animation: moveDown 25s linear infinite;
+  will-change: transform;
+}
+
+/* atas ke bawah */
+@keyframes moveUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* bawah ke atas */
+@keyframes moveDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+/* 🧠 biar lebih halus */
+.col {
+  overflow: hidden;
+  height: 100vh;
+}
+</style>
+</head>
+<body>
+  <section id="#home">
+    
+   <nav class="bg-white fixed w-full z-50 top-0 start-0 pt-3 transition-all" id="navbar"  data-aos-duration="1000">
+      <div class="xl:max-w-screen-xl flex flex-wrap items-center justify-between mx- md:mx-5 xl:mx-auto py-2 md:pt-4 p-4 transition">
+        <a href="https://flowbite.com/" class="flex items-center space-x-2 rtl:space-x-reverse text-lg">
+          <i class="bx bxs-education text-3xl md:text-3xl text-normal text-blue-600"></i>
+          <span class="self-center text-black whitespace-nowrap text-normal font-bold">Belajar<span
+              class="text-blue-600">Ku</span></span>
+        </a>
+        <div class="flex items-center md:order-2">
+          <button class="mt-1.5 hidden lg:block">
+            <i class='bx  bx-translate text-[23px] md:text-[26px] me-5 md:me-5 dark:text-slate-200'></i>
+          </button>
+          <button id="darkBtn" class="lg:mt-1.5 px-3 py-1.5 me-5 md:me-7 lg:bg-white bg-gray-100/80 rounded-lg">
+            <i class='bx bx-moon-stars text-xl lg:text-[26px] hover:text-blue-700 text-blue-600 dark:text-yellow-500'></i>
+          </button>
+          <div class="text-center flex items-center bg-gray-100/80 rounded-lg lg:hidden">
+            <button class="inline-flex items-center justify-cente bg-brand box-border border border-transparent hover:bg-brand-strong shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-1.5 focus:outline-none" type="button" id="menuBtn">
+              <i class="bx bxs-menu text-xl" id="menuIcon"></i>
+            </button>
+          </div>
+
+          <?php if (empty($_SESSION['id']) ?? ''): ?>
+                     <a href="route_web.php?page=index_login_page"
+            class="text-white hover:bg-brand-strong transition-all hidden lg:block box-border border border-transparent shadow-xs font-medium leading-5 rounded-lg text-sm  px-6 py-3 focus:outline-none bg-blue-600 hover:bg-blue-700">Login<i
+              class="fa-solid fa-door-open ms-2"></i></a>
+
+                         
+            <?php else: ?>
+           <!-- <div class="dropdown dropdown-end z-[9999]">
+              <button type="button" class="relative w-fit hidden lg:block transition">
+                
+                  <img src="<?= $_SESSION['foto'] ?? ''; ?>"
+                            class="relative w-12 h-12 rounded-full object-cover
+             border-2 border-blue-600
+             transition-transform duration-300
+             group-hover:scale-100">
+              </button>
+
+
+              <div tabindex="-1" class="dropdown-content bg-base-100 rounded-b-lg lg z-10 mt-2.5  dark:border-slate-900 dark:bg-[#00010b] transition-all">
+
+                
+                <a onclick="openEditProfil('<?= $_SESSION['id']; ?>')" class="w-full my-4 flex items-center justify-center cursor-pointer">
+                  <div class="flex flex-col items-center my-3">
+
+                    <div class="relative group">
+
+                      <span class="absolute inset-0 rounded-full bg-blue-500/20 blur-md scale-110 opacity-0 group-hover:opacity-100 transition duration-500"></span>
+
+                      <img src="<?= $_SESSION['foto'] ?? ''; ?>"
+                        class="relative w-16 h-16 rounded-full object-cover
+         border-2 border-blue-500
+         transition-transform duration-300
+         group-hover:scale-100">
+
+   
+
+                    </div>
+
+                  </div>
+                </a>
+
+                <div class="flex justify-center gap-2  border-t border-gray-200 dark:border-slate-900">
+
+                  <div class="w-full hover:bg-gray-100 transition-all rounded-lg rounded-tl-none rounded-e-none dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button type="button" onclick="document.getElementById('my_modal_6').showModal()" class="inline-flex items-center justify-center w-full text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-calculator text-xl"></i>
+                    </button>
+                  </div>
+
+                  <div class="w-full hover:bg-gray-100 transition-all dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button type="button" onclick="document.getElementById('my_modal_2').showModal()"
+                      class="inline-flex items-center justify-center w-full cursor-pointer text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-user bx-tada text-xl"></i>
+                    </button>
+                  </div>
+
+                  <div class="w-full hover:bg-gray-100 transition-all rounded-lg rounded-tr-none rounded-s-none dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button onclick="document.getElementById('my_modal_4').showModal()" class="inline-flex items-center justify-center w-full text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-notification text-xl"></i>
+                    </button>
+                  </div>
+
+                  <div class="w-full hover:bg-gray-100 transition-all rounded-lg rounded-tr-none rounded-s-none dark:hover:bg-slate-900 hover:text-blue-500 dark:hover:text-blue-600">
+                    <button onclick="document.getElementById('my_modal_7').showModal()" class="inline-flex items-center justify-center w-full text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading font-medium text-sm px-8 py-3.5">
+                      <i class="bx bx-music text-xl"></i>
+                    </button>
+                  </div>
+
+                </div>
+
+
+                <div class="block">
+                  <form method="POST">
+                    <button name="logout" class="w-full py-4 border-t border-gray-200 dark:border-slate-900 text-red-500 dark:hover:bg-red-950 font-semibold text-center flex items-center justify-center cursor-pointer hover:bg-red-50 rounded-b-lg">
+                      <i class="bx bx-door-open me-2"></i> Keluar
+                    </button>
+                  </form>
+                </div>
+
+              </div>
+            </div> -->
+              <?php endif; ?>
+        </div>
+        <div class="items-center justify-between hidden w-full lg:flex md:w-auto md:order-1" id="navbar-search">
+          <div class="relative mt-3 md:hidden">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                  d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+              </svg>
+            </div>
+            <input type="text" id="input-group-1"
+              class="block w-full ps-9 pe-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base px-2.5 py-2 shadow-xs placeholder:text-body"
+              placeholder="Search">
+          </div>
+          <ul
+            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary transition-all"
+            style="gap: 3rem;">
+            <li>
+              <a href="#home"
+                class="nav-link block py-2 px-3 color text-normal text-[#2273ff] flex items-center font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                <i class="bx bxs-video me-3"></i>Home</a>
+            </li>
+            <li>
+              <a href="#feature"
+                class="nav-link block py-2 px-3 text-normal font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                About</a>
+            </li>
+            <li>
+              <a href="route_web.php?page=index_landing_page#Paket"
+                class="nav-link block py-2 px-3 text-normal font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                Packet</a>
+            </li>
+            <li>
+              <a href="route_web.php?page=index_landing_page#Q&A"
+                class="nav-link block py-2 px-3 text-normal font-bold rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">
+                FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 w-full h-full max-w-7xl mx-auto min-h-screen flex items-stretch">
+     <div class="flex items-center">
+      <div class="py-8 px-4 mx-auto max-w-screen-2xl text-start lg:py-16">
+          <a href="index.php" class="inline-flex items-center justify-center w-fit px-7 py-3 border-2 border-gray-300/80 rounded-full mb-4 font-medium text-gray-700 bg-white transition-all duration-300 hover:bg-blue-100 hover:text-blue-600 hover:border-blue-600"> <i class="bx bxs-sparkles-alt text-[#2273ff] me-2"></i> Revolusi Belajar Digital </a>
+        <h1 class="mb-6 text-4xl font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl"><span class="text-[#2273ff]">Building dream</span>  beyond space or time</h1>
+        <p class="mb-8 text-base font-normal text-body md:text-xl">Perjalanan pengembangan diri dan mimpi yang tidak dibatasi oleh ruang dan waktu, untuk menciptakan masa penuh peluang.</p>
+    
+              
+           
+         
+        <div class="flex md:flex-row flex-col justify-center md:justify-start mt-8 w-full md:max-w-lg gap-5">
+           <a href="index_dashboard.html" class="group relative inline-flex items-center justify-center gap-3 w-full px-7 py-3.5 bg-blue-600 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:bg-blue-700"> 
+            <span class="pointer-events-none absolute inset-0 before:absolute before:top-0 before:-left-full before:h-full before:w-1/3 before:skew-x-12 before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent before:transition-all before:duration-700 group-hover:before:left-full"> </span> 
+            <span class="relative z-10">Belajar Sekarang</span> <i class="fa-solid fa-arrow-right relative z-10 transition-transform duration-300 group-hover:translate-x-1"></i> 
+          </a> 
+          
+          <a href="index.php" class="inline-flex items-center justify-center w-full px-7 py-3.5 border-2 border-gray-300/80 rounded-xl font-medium text-gray-700 bg-white transition-all duration-300 hover:bg-blue-100 hover:text-blue-600 hover:border-blue-600"> Jadwal </a> </div>
+    </div>
+     </div>
+
+           
+        
+<div class="flex items-center justify-center w-full min-h-screen py-10">
+  <div class="grid grid-cols-3 md:grid-cols-3 gap-4 max-w-xl max-h-[60vh]">
+    <!-- COL 1 (UP) -->
+    <div class="col h-[500px] md:h-[500px] overflow-hidden rounded-xl">
+        <div class="up flex flex-col gap-4">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg">
+
+            <!-- duplicate untuk loop -->
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg">
+        </div>
+    </div>
+
+    <!-- COL 2 (DOWN) -->
+    <div class="col h-[500px] md:h-[500px] overflow-hidden rounded-xl">
+        <div class="down flex flex-col gap-4">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg">
+
+            <!-- duplicate -->
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg">
+        </div>
+    </div>
+
+    <!-- COL 3 (UP) -->
+    <div class="col h-[500px] md:h-[500px] overflow-hidden rounded-xl">
+        <div class="up flex flex-col gap-4">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg">
+
+            <!-- duplicate -->
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg">
+            <img class="rounded-xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg">
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+  </section>
+
+  
+<section id="feature">
+  <div class="flex justify-center">
+          <div class="mt-16 mb-12">
+                          <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-calculator bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+              <h1 class="mb-6 text-4xl font-bold tracking-tighter text-center md:text-5xl lg:text-4xl">Pilih Area <span class="text-[#2273ff]"> Pembelajaran.</span></h1>
+                 <p class="mb-8 text-base font-normal text-body md:text-lg">Pengembangan diri, tidak dibatasi oleh ruang dan waktu. Tentukan pilihanmu</p>
+          </div>
+  </div>
+<div class="w-full max-w-7xl mx-auto">
+  <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-calculator bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Matematika
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">25 Jalur</p>
+    </div>
+</div>
+
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-atom bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Fisika
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">82 Jalur</p>
+    </div>
+</div>
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-globe bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Bahasa Inggris
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">96 Jalur</p>
+    </div>
+</div>
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-reading bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Bahasa Indonesia
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">56 Jalur</p>
+    </div>
+</div>
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-brush bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Seni
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">75 Jalur</p>
+    </div>
+</div>
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-code-alt bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Pemrograman
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">47 Jalur</p>
+    </div>
+</div>
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-flag-alt bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Pendidikan Pancasilan
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">67 Jalur</p>
+    </div>
+</div>
+
+ <div class="w-full max-w-sm mx-a p-8 border border-default rounded-2xl shadow-xs mx-auto">
+    
+    <div class="flex w-fit justify-center items-center mx-auto">
+        <i class="bx bx-message bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+    <div class="text-center">
+        <a href="#">
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-heading">
+                Muatan Lokal
+            </h5>
+        </a>
+
+        <p class="mb-3 text-body">17 Jalur</p>
+    </div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="about">
+  <div class="flex w-full h-screen max-w-7xl items-center mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2">
+  
+           <div class="content_1 flex justify-center relative bg-white">
+
+              <div class="absolute bottom-10 w-40 h-[2px] bg-gradient-to-r from-transparent via-[#0062ff]/30 to-transparent"></div>
+
+              <lottie-player
+                src="assets/Map Indo.json"
+                background="transparent"
+                speed="1"
+                class="relative"
+                style="width: 100%; max-width: 600px; height: 450px;"
+                loop
+                autoplay>
+              </lottie-player>
+
+            </div>
+
+            <div class="content-2 flex items-center">
+                <div class="content">
+                        <h1 class="mb-6 text-4xl text-center md:text-start font-bold tracking-tighter text-heading md:text-5xl lg:text-5xl"><span class="text-[#2273ff]">Empowering Learning  </span> Across Every - Distance.</h1>
+                 
+                        <a href="index.php" class="group relative inline-flex items-center justify-center gap-3 mt-4 w-64 px-7 py-3.5 bg-blue-600 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:bg-blue-700"> 
+            <span class="pointer-events-none absolute inset-0 before:absolute before:top-0 before:-left-full before:h-full before:w-1/3 before:skew-x-12 before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent before:transition-all before:duration-700 group-hover:before:left-full"> </span> 
+            <span class="relative z-10">Belajar Sekarang</span> <i class="fa-solid fa-arrow-right relative z-10 transition-transform duration-300 group-hover:translate-x-1"></i> 
+          </a>
+          <!-- <p class="mb-8 text-base font-normal text-body md:text-xl">Belajar bukan hanya tentang mendapatkan ilmu, tetapi juga tentang mengembangkan potensi dan mewujudkan mimpi.</p> -->
+               
+                </div>
+            </div>
+</div>
+</div>
+</section>
+
+<section id="onlineClass">
+  <div class="flex justify-center">
+    <div>
+            <div class="flex justify-center">
+
+                                        <div class="flex w-fit justify-center  items-center mx-auto">
+        <i class="bx bx-video bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+            </div>
+            <h1 class="mb-4 text-xl font-bold text-center tracking-tighter text-heading md:text-5xl lg:text-4xl">Pembelajaran<span class="text-[#2273ff]"> <span class="text-blue-500">Live Interaktif</span></span></h1>
+        <p class="mb-8 text-base font-normal text-body md:text-xl">Belajar langsung dengan mentor profesional secara real-time.</p>
+    </div>
+  </div>
+          <div class="w-full max-w-7xl mx-auto">
+   
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10 mt-16">
+              
+
+<div class="max-w-sm overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-lg shadow-blue-100/20 transition hover:-translate-y-1">
+
+    <!-- IMAGE -->
+    <div class="relative overflow-hidden">
+
+        <img
+            class="h-56 w-full object-cover transition duration-500 hover:scale-105"
+            src="assets/img/Download realistic math chalkboard background illustration for free.jpg"
+            alt=""
+        >
+
+        <!-- SIMPLE LABEL -->
+        <div class="absolute left-4 top-4">
+
+            <span class="rounded-full bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-lg">
+                Matematika
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-6">
+
+        <!-- SMALL INFO -->
+        <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
+
+            <i class='bx bx-time-five'></i>
+
+            120 Menit
+
+        </div>
+
+        <!-- TITLE -->
+        <a href="#">
+
+            <h5 class="text-2xl font-bold leading-tight text-slate-800 transition hover:text-blue-600">
+                Integral & Diferensial - Teknik Cepat
+            </h5>
+
+        </a>
+
+        <!-- DESCRIPTION -->
+        <p class="mt-4 text-sm leading-7 text-slate-500">
+            Pelajari integral tak tentu, integral tentu dengan contoh penerapan dunia nyata.
+        </p>
+
+        <!-- BUTTON -->
+        <a
+            href="#"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+
+            Mulai Belajar
+
+            <svg
+                class="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0-4-4m4 4-4 4"/>
+            </svg>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="max-w-sm overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-lg shadow-blue-100/20 transition hover:-translate-y-1">
+
+    <!-- IMAGE -->
+    <div class="relative overflow-hidden">
+
+        <img
+            class="h-56 w-full object-cover transition duration-500 hover:scale-105"
+            src="assets/img/download (14).jpg"
+            alt=""
+        >
+
+        <!-- SIMPLE LABEL -->
+        <div class="absolute left-4 top-4">
+
+            <span class="rounded-full bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-lg">
+                Fisika
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-6">
+
+        <!-- SMALL INFO -->
+        <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
+
+            <i class='bx bx-time-five'></i>
+
+            180 Menit
+
+        </div>
+
+        <!-- TITLE -->
+        <a href="#">
+
+            <h5 class="text-2xl font-bold leading-tight text-slate-800 transition hover:text-blue-600">
+                Hukum Newton & Aplikasinya
+            </h5>
+
+        </a>
+
+        <!-- DESCRIPTION -->
+        <p class="mt-4 text-sm leading-7 text-slate-500">
+            Pelajari konsep gaya, massa, dan percepatan dengan contoh penerapan dunia nyata.
+        </p>
+
+        <!-- BUTTON -->
+        <a
+            href="#"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+
+            Mulai Belajar
+
+            <svg
+                class="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0-4-4m4 4-4 4"/>
+            </svg>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="max-w-sm overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-lg shadow-blue-100/20 transition hover:-translate-y-1">
+
+    <!-- IMAGE -->
+    <div class="relative overflow-hidden">
+
+        <img
+            class="h-56 w-full object-cover transition duration-500 hover:scale-105"
+            src="assets/img/Hình nền các môn học (1).jpg"
+            alt=""
+        >
+
+        <!-- SIMPLE LABEL -->
+        <div class="absolute left-4 top-4">
+
+            <span class="rounded-full bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-lg">
+                Bahasa Inggris
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-6">
+
+        <!-- SMALL INFO -->
+        <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
+
+            <i class='bx bx-time-five'></i>
+
+            45 Menit
+
+        </div>
+
+        <!-- TITLE -->
+        <a href="#">
+
+            <h5 class="text-2xl font-bold leading-tight text-slate-800 transition hover:text-blue-600">
+                TOEFL English Speaking Mastery
+            </h5>
+
+        </a>
+
+        <!-- DESCRIPTION -->
+        <p class="mt-4 text-sm leading-7 text-slate-500">
+            Pelajari simple past, past tense, dan present simple dengan contoh penerapan dunia nyata.
+        </p>
+
+        <!-- BUTTON -->
+        <a
+            href="#"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+
+            Mulai Belajar
+
+            <svg
+                class="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0-4-4m4 4-4 4"/>
+            </svg>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="max-w-sm overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-lg shadow-blue-100/20 transition hover:-translate-y-1">
+
+    <!-- IMAGE -->
+    <div class="relative overflow-hidden">
+
+        <img
+            class="h-56 w-full object-cover transition duration-500 hover:scale-105"
+            src="assets/img/cambodia famous landmark silhouette style with text inside.jpg"
+            alt=""
+        >
+
+        <!-- SIMPLE LABEL -->
+        <div class="absolute left-4 top-4">
+
+            <span class="rounded-full bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-lg">
+                Seni Budaya
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-6">
+
+        <!-- SMALL INFO -->
+        <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
+
+            <i class='bx bx-time-five'></i>
+
+            75 Menit
+
+        </div>
+
+        <!-- TITLE -->
+        <a href="#">
+
+            <h5 class="text-2xl font-bold leading-tight text-slate-800 transition hover:text-blue-600">
+                Seni budaya sebagai kebudayaan
+            </h5>
+
+        </a>
+
+        <!-- DESCRIPTION -->
+        <p class="mt-4 text-sm leading-7 text-slate-500">
+            Pelajari konsep budaya, makanan, dan bahasa dengan contoh penerapan dunia nyata.
+        </p>
+
+        <!-- BUTTON -->
+        <a
+            href="#"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+
+            Mulai Belajar
+
+            <svg
+                class="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0-4-4m4 4-4 4"/>
+            </svg>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="max-w-sm overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-lg shadow-blue-100/20 transition hover:-translate-y-1">
+
+    <!-- IMAGE -->
+    <div class="relative overflow-hidden">
+
+        <img
+            class="h-56 w-full object-cover transition duration-500 hover:scale-105"
+            src="assets/img/76631631198168738.jpg"
+            alt=""
+        >
+
+        <!-- SIMPLE LABEL -->
+        <div class="absolute left-4 top-4">
+
+            <span class="rounded-full bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-lg">
+                Pemrograman
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-6">
+
+        <!-- SMALL INFO -->
+        <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
+
+            <i class='bx bx-time-five'></i>
+
+            35 Menit
+
+        </div>
+
+        <!-- TITLE -->
+        <a href="#">
+
+            <h5 class="text-2xl font-bold leading-tight text-slate-800 transition hover:text-blue-600">
+                Program (AI) Sebagai Digitalisasi
+            </h5>
+
+        </a>
+
+        <!-- DESCRIPTION -->
+        <p class="mt-4 text-sm leading-7 text-slate-500">
+            Pemrograman berbasis AI, dengan dataset singkat dan ter intergrasi dengan offline.
+        </p>
+
+        <!-- BUTTON -->
+        <a
+            href="#"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+
+            Mulai Belajar
+
+            <svg
+                class="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0-4-4m4 4-4 4"/>
+            </svg>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="max-w-sm overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-lg shadow-blue-100/20 transition hover:-translate-y-1">
+
+    <!-- IMAGE -->
+    <div class="relative overflow-hidden">
+
+        <img
+            class="h-56 w-full object-cover transition duration-500 hover:scale-105"
+            src="assets/img/Indonesia wallpaper (1).jpg"
+            alt=""
+        >
+
+        <!-- SIMPLE LABEL -->
+        <div class="absolute left-4 top-4">
+
+            <span class="rounded-full bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-lg">
+                Pendidikan Pancasila
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-6">
+
+        <!-- SMALL INFO -->
+        <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
+
+            <i class='bx bx-time-five'></i>
+
+            90 Menit
+
+        </div>
+
+        <!-- TITLE -->
+        <a href="#">
+
+            <h5 class="text-2xl font-bold leading-tight text-slate-800 transition hover:text-blue-600">
+                Pemilihan Umum Sarana
+                 Adu Domba
+            </h5>
+
+        </a>
+
+        <!-- DESCRIPTION -->
+        <p class="mt-4 text-sm leading-7 text-slate-500">
+            Pelajari konsep pemilu, makna, dan manfaat dengan contoh penerapan dunia nyata.
+        </p>
+
+        <!-- BUTTON -->
+        <a
+            href="#"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+
+            Mulai Belajar
+
+            <svg
+                class="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0-4-4m4 4-4 4"/>
+            </svg>
+
+        </a>
+
+    </div>
+
+</div>
+            </div>
+          </div>
+</section>
+  
+
+
+
+<!-- <section id="#badge">
+  <div class="h-screen max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+ 
+
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-2xl shadow-xs">
+    <div class="flex w-fit items-center bg-orange-50 px-3 p-2 rounded-xl mb-4">
+      <i class="bx bx-fire text-3xl text-orange-500"></i>
+    </div>
+    <a href="#">
+        <h5 class="mb-2 text-3xl font-bold tracking-tight text-heading">7 hari</h5>
+    </a>
+    <p class="mb-3 text-body">Streak Belajar:</p>
+    <a href="#" class="inline-flex font-medium items-center text-fg-brand hover:underline">
+        Keep it up!
+        <svg class="w-4 h-4 ms-2 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/></svg>
+    </a>
+</div>
+
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-2xl shadow-xs">
+    <div class="flex w-fit items-center bg-blue-50 px-3 p-2 rounded-xl mb-4">
+      <i class="bx bx-clock text-3xl text-blue-500"></i>
+    </div>
+    <a href="#">
+        <h5 class="mb-2 text-3xl font-bold tracking-tight text-heading">24.5 Jam</h5>
+    </a>
+    <p class="mb-3 text-body">Streak Belajar:</p>
+    <a href="#" class="inline-flex font-medium items-center text-fg-brand hover:underline">
+        Keep it up!
+        <svg class="w-4 h-4 ms-2 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/></svg>
+    </a>
+</div>
+
+
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-2xl shadow-xs">
+    <div class="flex w-fit items-center bg-green-50 px-3 p-2 rounded-xl mb-4">
+      <i class="bx bx-seal-check text-3xl text-green-500"></i>
+    </div>
+    <a href="#">
+        <h5 class="mb-2 text-3xl font-bold tracking-tight text-heading">42</h5>
+    </a>
+    <p class="mb-3 text-body">Total minggu:</p>
+    <a href="#" class="inline-flex font-medium items-center text-fg-brand hover:underline">
+        Minggu ini!
+        <svg class="w-4 h-4 ms-2 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/></svg>
+    </a>
+</div>
+
+
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-2xl shadow-xs">
+    <div class="flex w-fit items-center bg-purple-50 px-3 p-2 rounded-xl mb-4">
+      <i class="bx bx-medal text-3xl text-purple-500"></i>
+    </div>
+    <a href="#">
+        <h5 class="mb-2 text-3xl font-bold tracking-tight text-heading">12</h5>
+    </a>
+    <p class="mb-3 text-body">Streak Belajar:</p>
+    <a href="#" class="inline-flex font-medium items-center text-fg-brand hover:underline">
+        Keep it up!
+        <svg class="w-4 h-4 ms-2 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/></svg>
+    </a>
+</div>
+
+</div>
+</div>
+</section> -->
+
+<section id="qna">
+    <div class="flex justify-center my-16">
+    <div>
+            <div class="flex justify-center">
+
+                                        <div class="flex w-fit justify-center  items-center mx-auto">
+        <i class="bx bx-info-octagon bg-blue-500 px-3 p-2 rounded-xl mb-4 text-3xl text-white"></i>
+    </div>
+
+            </div>
+            <h1 class="mb-4 text-xl font-bold text-center tracking-tighter text-heading md:text-5xl lg:text-4xl">Pemberitahuan<span class="text-[#2273ff]"> <span class="text-blue-500">Informasi & Q&A</span></span></h1>
+        <p class="mb-8 text-base font-normal text-body md:text-xl">Belajar langsung dengan mentor profesional secara real-time.</p>
+    </div>
+  </div>
+<div class="w-full max-w-7xl mx-auto px-4">
+
+
+
+  <!-- FAQ -->
+  <div
+    id="accordion-color"
+    data-accordion="collapse"
+    class="overflow-hidden rounded-3xl border border-blue-100 bg-white"
+  >
+
+    <!-- ITEM 1 -->
+    <h2 id="accordion-color-heading-1">
+
+      <button
+        type="button"
+        class="group flex w-full items-center justify-between border-b border-gray-200 bg-white px-7 py-6 text-left transition hover:bg-blue-50"
+        data-accordion-target="#accordion-color-body-1"
+        aria-expanded="true"
+        aria-controls="accordion-color-body-1"
+      >
+
+        <div class="flex items-center gap-4">
+
+          <div class="flex h-12 w-12 items-center justify-center bg-blue-100 text-blue-600">
+            <i class='bx bx-book-open text-2xl'></i>
+          </div>
+
+          <span class="text-lg font-semibold text-slate-800 group-hover:text-blue-600">
+            Apa itu BelajarKu?
+          </span>
+
+        </div>
+
+        <svg
+          data-accordion-icon
+          class="h-5 w-5 shrink-0 rotate-180 text-blue-500 transition-transform"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
+        </svg>
+
+      </button>
+
+    </h2>
+
+    <div
+      id="accordion-color-body-1"
+      class="hidden border-b border-blue-100 bg-blue-50/50"
+      aria-labelledby="accordion-color-heading-1"
+    >
+
+      <div class="px-7 pb-7 pt-2 text-slate-600 leading-8 text-lg">
+        BelajarKu adalah platform pembelajaran digital yang menyediakan
+        berbagai jalur belajar interaktif untuk membantu pengguna
+        mengembangkan kemampuan dan pengetahuan tanpa dibatasi ruang dan waktu.
+      </div>
+
+    </div>
+
+    <!-- ITEM 2 -->
+    <h2 id="accordion-color-heading-2">
+
+      <button
+        type="button"
+        class="group flex w-full items-center justify-between border-b border-blue-100 bg-white px-7 py-6 text-left transition"
+        data-accordion-target="#accordion-color-body-2"
+        aria-expanded="false"
+        aria-controls="accordion-color-body-2"
+      >
+
+        <div class="flex items-center gap-4">
+
+          <div class="flex h-12 w-12 items-center justify-center bg-blue-100 text-blue-600">
+            <i class='bx bx-world text-2xl'></i>
+          </div>
+
+          <span class="text-lg font-semibold text-slate-800 group-hover:text-blue-600">
+            Apakah BelajarKu bisa diakses di mana saja?
+          </span>
+
+        </div>
+
+        <svg
+          data-accordion-icon
+          class="h-5 w-5 shrink-0 rotate-180 text-blue-500 transition-transform"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
+        </svg>
+
+      </button>
+
+    </h2>
+
+    <div
+      id="accordion-color-body-2"
+      class="hidden border-b border-blue-100 bg-blue-50/50"
+      aria-labelledby="accordion-color-heading-2"
+    >
+
+      <div class="px-7 pb-7 pt-2 text-slate-600 leading-8 text-lg">
+        Ya, BelajarKu dapat diakses secara online kapan saja dan di mana saja
+        selama terhubung dengan internet, sehingga proses belajar menjadi
+        lebih fleksibel dan mudah.
+      </div>
+
+    </div>
+
+    <!-- ITEM 3 -->
+    <h2 id="accordion-color-heading-3">
+
+      <button
+        type="button"
+        class="group flex w-full items-center justify-between bg-white px-7 py-6 text-left transition hover:bg-blue-50"
+        data-accordion-target="#accordion-color-body-3"
+        aria-expanded="false"
+        aria-controls="accordion-color-body-3"
+      >
+
+        <div class="flex items-center gap-4">
+
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-600">
+            <i class='bx bx-grid-alt text-2xl'></i>
+          </div>
+
+          <span class="text-lg font-semibold text-slate-800 group-hover:text-blue-600">
+            Fitur apa saja yang tersedia di BelajarKu?
+          </span>
+
+        </div>
+
+        <svg
+          data-accordion-icon
+          class="h-5 w-5 shrink-0 rotate-180 text-blue-500 transition-transform"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
+        </svg>
+
+      </button>
+
+    </h2>
+
+    <div
+      id="accordion-color-body-3"
+      class="hidden bg-blue-50/50"
+      aria-labelledby="accordion-color-heading-3"
+    >
+
+      <div class="px-7 pb-7 pt-2 text-slate-600 leading-8 text-lg">
+        BelajarKu menyediakan berbagai fitur seperti jalur pembelajaran,
+        live class, video pembelajaran, serta pilihan materi dari berbagai
+        bidang seperti Matematika, Bahasa Inggris, Pemrograman, Seni,
+        dan lainnya.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+<section id="footer">
+  
+
+<footer class="bg-neutral-primary-soft mt-20">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="md:flex md:justify-between">
+          <div class="mb-6 md:mb-0">
+              <a href="https://flowbite.com/" class="flex items-center">
+                  <i class="bx bxs-education text-blue-600 me-3 text-3xl"></i>
+                  <span class="text-heading self-center text-2xl font-semibold whitespace-nowrap">Belajar<span class="text-blue-600">Ku</span></span>
+              </a>
+          </div>
+          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Navigation</h2>
+                  <ul class="text-body font-medium">
+                      <li class="mb-4">
+                          <a href="https://flowbite.com/" class="hover:underline">Home</a>
+                      </li>
+                      <li>
+                          <a href="https://tailwindcss.com/" class="hover:underline">About</a>
+                      </li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Follow us</h2>
+                  <ul class="text-body font-medium">
+                      <li class="mb-4">
+                          <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                      </li>
+                      <li>
+                          <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                      </li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Legal</h2>
+                  <ul class="text-body font-medium">
+                      <li class="mb-4">
+                          <a href="#" class="hover:underline">Privacy Policy</a>
+                      </li>
+                      <li>
+                          <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <hr class="my-6 border-default sm:mx-auto lg:my-8" />
+      <div class="sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-body sm:text-center">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
+          </span>
+          <div class="flex mt-4 sm:justify-center sm:mt-0">
+            <a href="#" class="text-body hover:text-heading">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/></svg>
+                <span class="sr-only">Facebook page</span>
+            </a>
+            <a href="#" class="text-body hover:text-heading ms-5">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/></svg>
+                <span class="sr-only">Discord community</span>
+            </a>
+            <a href="#" class="text-body hover:text-heading ms-5">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/></svg>
+            <span class="sr-only">Twitter page</span>
+            </a>
+            <a href="#" class="text-body hover:text-heading ms-5">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/></svg>
+                <span class="sr-only">GitHub account</span>
+            </a>
+            <a href="#" class="text-body hover:text-heading ms-5">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 10 10A10.009 10.009 0 0 0 12 2Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.093 20.093 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM10 3.707a8.82 8.82 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.755 45.755 0 0 0 10 3.707Zm-6.358 6.555a8.57 8.57 0 0 1 4.73-5.981 53.99 53.99 0 0 1 3.168 4.941 32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.641 31.641 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM12 20.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 15.113 13a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd"/></svg>
+                <span class="sr-only">Dribbble account</span>
+            </a>
+          </div>
+      </div>
+    </div>
+</footer>
+
+</section>
+
+ <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+ <script src="script.js"></script>
+</body>
+</html>
